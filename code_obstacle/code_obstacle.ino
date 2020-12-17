@@ -1,8 +1,10 @@
+//capteur variable
 int capteurAV=6;
 int capteurAR=7;
 int capteurAVG=8;
 int capteurAVD=9;
 
+//configuration des I/O
 void setup(){
   pinMode(capteurAV, INPUT);
   pinMode(capteurAR, INPUT);
@@ -12,9 +14,9 @@ void setup(){
 
 void loop()
 {
-  if (digitalRead(capteurAV) == HIGH || digitalRead(capteurAVG) == HIGH || digitalRead(capteurAVD) == HIGH)
+  if (digitalRead(capteurAV) == HIGH || digitalRead(capteurAVG) == HIGH || digitalRead(capteurAVD) == HIGH) // les 3 capteur avant en état haut 
     reculer(1);
-  else if (digitalRead(capteurAR) == HIGH)
+  else if (digitalRead(capteurAR) == HIGH) // capteur arriere en etat haut
     StopMoteur();
     else
       avancer();
@@ -35,5 +37,4 @@ void StopMoteur()
 }
 // activer le moteur (pont en H sur on)
 void avancer(){
-  
-}
+  } 
