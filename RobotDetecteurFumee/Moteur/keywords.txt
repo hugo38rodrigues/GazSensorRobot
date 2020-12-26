@@ -1,0 +1,4 @@
+Moteur	KEYWORD1
+go_horaire	KEYWORD2
+go_anti_horaire	KEYWORD2
+arret	KEYWORD2

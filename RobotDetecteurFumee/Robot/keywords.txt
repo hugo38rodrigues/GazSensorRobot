@@ -1,0 +1,9 @@
+Robot	KEYWORD1
+avance	KEYWORD2
+recule	KEYWORD2
+tourneDroite	KEYWORD2
+tourneGauche	KEYWORD2
+arret	KEYWORD2
+Moteur	KEYWORD1
+go_horaire	KEYWORD2
+go_anti_horaire	KEYWORD2
