@@ -9,12 +9,14 @@
 
 class Moteur {
   public :
+    Moteur();
     Moteur (int pinActivation, int pinMoteur_H, int pinMoteur_A);
     void go_horaire();
     void go_anti_horaire();
     void arret();
 
   private :
+    bool _isConfigured;
     int _pinActivation;
     int _pinMoteur_H;
     int _pinMoteur_A;

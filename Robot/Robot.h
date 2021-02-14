@@ -7,6 +7,7 @@
 
 #include "Arduino.h"
 #include "Moteur.h"
+#include "IRSensor.h"
 
 class Robot {
   public :
@@ -19,12 +20,18 @@ class Robot {
     void tourneDroite();
     void tourneGauche();
 	void arret();
-
+    void addSensorFront(int pinIr);
+    void addSensorLeft(int pinIr);
+    void addSensorRight(int pinIr);
+    IRSensor IRSensorFront;
+    IRSensor IRSensorLeft;
+    IRSensor IRSensorRight;
 
   private :
-	Moteur *_moteur1;
-	Moteur *_moteur2;
-	Moteur *_moteur3;
+    Moteur _moteur1;
+    Moteur _moteur2;
+    Moteur _moteur3;
+
 };
 
 #endif

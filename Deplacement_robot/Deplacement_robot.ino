@@ -18,27 +18,55 @@ const int Driver2_ENB = 2;    // Vert
 const int Driver2_M3 = 4;    // Violet
 const int Driver2_M4 = 3;    // Bleu
 
-unsigned long chrono=0;
+// Configuration des PIN_IR
+const int IrFront = 10;
+const int IrLeft = 9;
+const int IrRight = 8; 
+
+
  
 Robot robot = Robot();
-
+bool turnRight= false;
+bool turnLeft=false;
 void setup() {
-/*  moteur1.arret();
-  moteur2.arret();
-  moteur3.arret();
-*/
-  robot.addMotor2(Driver2_ENB, Driver2_M3, Driver2_M4); //Moteur_D
-
   robot.addMotor1(Driver1_ENA, Driver1_M1, Driver1_M2); //Moteur_G
-  //robot.addMotor3(Driver2_ENA, Driver2_M1, Driver2_M2); //Moteur_A
+  robot.addMotor2(Driver2_ENB, Driver2_M3, Driver2_M4); //Moteur_D
+  robot.addMotor3(Driver2_ENA, Driver2_M1, Driver2_M2); //Moteur_A
+  robot.addSensorFront(IrFront);
+  robot.addSensorLeft(IrLeft);
+  robot.addSensorRight(IrRight);
   robot.arret();
+  
 
  delay(2000);
 }
 
 void loop() {
-  unsigned long distance=100;   // 100 cm
   
+  if(robot.IRSensorRight.isBlackLine()){
+      turnRight=true;
+      turnLeft=false;
+  }
+
+  if(robot.IRSensorLeft.isBlackLine()){
+      turnRight=false;
+      turnLeft=true;
+  }
+      
+  if(robot.IRSensorFront.isBlackLine())
+    robot.avance();
+  else {
+    robot.arret();
+    if (turnLeft)
+      robot.tourneGauche();
+    else if (turnRight)
+      robot.tourneDroite();
+   }
+  delay(100);
+}
+void avance100(){
+   unsigned long distance=100;   // 100 cm
+   unsigned long chrono=0;
   if (chrono == 0) {
     chrono = millis();
     robot.avance();
@@ -47,47 +75,4 @@ void loop() {
   else if ((millis() - chrono) > 20*distance) {
     robot.arret();
   }
-
-  /*
-  // Robot Avance
-  moteur1.go_horaire();
-  moteur2.go_anti_horaire();
-  delay (2000);
-  
-  moteur1.arret();
-  moteur2.arret();
-  delay (500);
-
-  // Robot Recul
-  moteur1.go_anti_horaire();
-  moteur2.go_horaire();
-  delay (2000);
-
-  moteur1.arret();
-  moteur2.arret();
-  delay (500);
-  
-  // Robot demi-tour gauche
-  moteur1.go_horaire();
-  moteur2.go_horaire();
-  moteur3.go_horaire();
-  delay (2000);
-
-  moteur1.arret();
-  moteur2.arret();
-  moteur3.arret();
-  delay (500);
-
-    // Robot demi-tour droite
-  moteur1.go_anti_horaire();
-  moteur2.go_anti_horaire();
-  moteur3.go_anti_horaire();
-  delay (2000);
-
-  moteur1.arret();
-  moteur2.arret();
-  moteur3.arret();
-  delay (500);
-  */
-    delay(100);
 }
