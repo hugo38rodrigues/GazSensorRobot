@@ -1,49 +1,52 @@
-#include <Moteur.h>
 #include <Robot.h>
 
 // Configuration des PIN Driver 1
 const int Driver1_ENA = 11;   // Marron
-const int Driver1_IN1 = 12;   // Rouge
-const int Driver1_IN2 = 13;   // Orange
+const int Driver1_M1 = 12;   // Rouge
+const int Driver1_M2 = 13;   // Orange
 
 const int Driver1_ENB = 0;    // N/A
-const int Driver1_IN3 = 0;    // N/A
-const int Driver1_IN4 = 0;    // N/A
+const int Driver1_M3 = 0;    // N/A
+const int Driver1_M4 = 0;    // N/A
 
 // Configuration des PIN Driver 2
 const int Driver2_ENA = 7;    // Noir
-const int Driver2_IN1 = 6;    // Blanc
-const int Driver2_IN2 = 5;    // Gris
+const int Driver2_M1 = 6;    // Blanc
+const int Driver2_M2 = 5;    // Gris
 
 const int Driver2_ENB = 2;    // Vert
-const int Driver2_IN3 = 4;    // Violet
-const int Driver2_IN4 = 3;    // Bleu
+const int Driver2_M3 = 4;    // Violet
+const int Driver2_M4 = 3;    // Bleu
 
-Moteur moteur1(Driver1_ENA, Driver1_IN1, Driver1_IN2);
-Moteur moteur2(Driver2_ENB, Driver2_IN3, Driver2_IN4);
-Moteur moteur3(Driver2_ENA, Driver2_IN1, Driver2_IN2);
-Robot robot (moteur1, moteur2, moteur3);
+unsigned long chrono=0;
+ 
+Robot robot = Robot();
 
 void setup() {
 /*  moteur1.arret();
   moteur2.arret();
   moteur3.arret();
 */
+  robot.addMotor2(Driver2_ENB, Driver2_M3, Driver2_M4); //Moteur_D
+
+  robot.addMotor1(Driver1_ENA, Driver1_M1, Driver1_M2); //Moteur_G
+  //robot.addMotor3(Driver2_ENA, Driver2_M1, Driver2_M2); //Moteur_A
   robot.arret();
 
  delay(2000);
 }
 
 void loop() {
-  delay(500);
-
-  robot.avance(100);
-
-  robot.arret();
-
-  delay(2000);
-
-  robot.recule(50);
+  unsigned long distance=100;   // 100 cm
+  
+  if (chrono == 0) {
+    chrono = millis();
+    robot.avance();
+  }
+  // 1 cm = 20 ms
+  else if ((millis() - chrono) > 20*distance) {
+    robot.arret();
+  }
 
   /*
   // Robot Avance
@@ -86,4 +89,5 @@ void loop() {
   moteur3.arret();
   delay (500);
   */
+    delay(100);
 }
