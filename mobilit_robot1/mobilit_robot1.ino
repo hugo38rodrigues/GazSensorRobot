@@ -8,17 +8,17 @@ const int pinActivationH2 = 3;
 
 void setup()
 {	pinMode(pinIR,INPUT);		
-  	pinMode(pinMoteur1F,OUTPUT);
+ 	pinMode(pinMoteur1F,OUTPUT);
  	pinMode(pinMoteur1B,OUTPUT);
-  	pinMode(pinMoteur2F,OUTPUT);
+  pinMode(pinMoteur2F,OUTPUT);
 	pinMode(pinMoteur2B,OUTPUT);
 	pinMode(pinActivationH1,OUTPUT);
  	pinMode(pinActivationH2,OUTPUT);
  	
  	digitalWrite(pinMoteur1F,HIGH);
-    digitalWrite(pinMoteur2F,HIGH);
+  digitalWrite(pinMoteur2F,HIGH);
 	digitalWrite(pinMoteur1B,LOW);	
-  	digitalWrite(pinMoteur2B,LOW);
+  digitalWrite(pinMoteur2B,LOW);
  	
 }
 
