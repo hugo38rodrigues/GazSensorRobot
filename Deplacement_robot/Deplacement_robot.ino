@@ -38,7 +38,7 @@ void setup() {
   robot.arret();
   
 
- delay(2000);
+ delay(5000);
 }
 
 void loop() {
@@ -62,7 +62,7 @@ void loop() {
     else if (turnRight)
       robot.tourneDroite();
    }
-  delay(100);
+  delay(20);
 }
 void avance100(){
    unsigned long distance=100;   // 100 cm

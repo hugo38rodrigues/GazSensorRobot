@@ -17,7 +17,7 @@ void IRSensor::setPin(int pinIr){
 }
 
 bool IRSensor::isBlackLine(){
-    if (_isConfigured && digitalRead(_pinIr)==LOW)
+    if (_isConfigured && digitalRead(_pinIr)==HIGH)
         return true;
     else
         return false;
