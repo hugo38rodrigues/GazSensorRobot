@@ -9,7 +9,7 @@ Moteur::Moteur(){
     _isConfigured = false;
 }
 
-Moteur::Moteur (int pinActivation, int pinMoteur_H, int pinMoteur_A) {
+void Moteur::setPins(int pinActivation, int pinMoteur_H, int pinMoteur_A){
   // Configuration des pins moteur
   pinMode (pinActivation, OUTPUT);
   _pinActivation = pinActivation;
@@ -25,24 +25,24 @@ Moteur::Moteur (int pinActivation, int pinMoteur_H, int pinMoteur_A) {
 
 void Moteur::go_horaire() {
     if (_isConfigured) {
-        digitalWrite(_pinActivation, LOW);
+        analogWrite(_pinActivation, LOW);
         digitalWrite(_pinMoteur_H, LOW);
         digitalWrite(_pinMoteur_A, HIGH);
 
-        digitalWrite(_pinActivation, HIGH);
+        analogWrite(_pinActivation, HIGH);
     }
 }
 
 void Moteur::go_anti_horaire() {
     if (_isConfigured) {
-        digitalWrite(_pinActivation, LOW);
+        analogWrite(_pinActivation, LOW);
         digitalWrite(_pinMoteur_H, HIGH);
         digitalWrite(_pinMoteur_A, LOW);
-        digitalWrite(_pinActivation, HIGH);
+        analogWrite(_pinActivation, HIGH);
     }
 }
 
 void Moteur::arret() {
     if (_isConfigured)
-        digitalWrite(_pinActivation, LOW);
+        analogWrite(_pinActivation, LOW);
 }

@@ -12,13 +12,17 @@ CONFIG += c++11
 SOURCES += \
     IRSensor.cpp \
     Moteur.cpp \
-    Robot.cpp
+    Near_sensor.cpp \
+    Robot.cpp \
+    jail.cpp
 
 HEADERS += \
     IRSensor.h \
     Moteur.h \
+    Near_sensor.h \
     Robot.h \
-    Robot_global.h
+    Robot_global.h \
+    jail.h
 
 # Default rules for deployment.
 unix {

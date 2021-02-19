@@ -6,6 +6,8 @@
 #include "Robot.h"
 #include "Moteur.h"
 #include "IRSensor.h"
+#include "Near_sensor.h"
+#include "jail.h"
 
 Robot::Robot() {
     _moteur1 = Moteur();
@@ -14,18 +16,22 @@ Robot::Robot() {
     IRSensorFront = IRSensor();
     IRSensorLeft = IRSensor();
     IRSensorRight = IRSensor();
+    jail = Jail();
+}
+void Robot::addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4){
+    jail.setPins(pinNear1, pinNear2,pinNear3, pinNear4);
 }
 
 void Robot::addMotor1(int pinActivation, int pinMoteur_H, int pinMoteur_A){
-   _moteur1 = Moteur(pinActivation,pinMoteur_H, pinMoteur_A);
+    _moteur1.setPins(pinActivation,pinMoteur_H, pinMoteur_A);
 }
 
 void Robot::addMotor2(int pinActivation, int pinMoteur_H, int pinMoteur_A){
-   _moteur2 = Moteur(pinActivation,pinMoteur_H, pinMoteur_A);
+    _moteur2.setPins(pinActivation,pinMoteur_H, pinMoteur_A);
 }
 
 void Robot::addMotor3(int pinActivation, int pinMoteur_H, int pinMoteur_A){
-   _moteur3 = Moteur(pinActivation,pinMoteur_H, pinMoteur_A);
+    _moteur3.setPins(pinActivation,pinMoteur_H, pinMoteur_A);
 }
 
 void Robot::addSensorFront(int pinIr){

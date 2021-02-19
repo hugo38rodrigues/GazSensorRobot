@@ -1,0 +1,12 @@
+#ifndef SENSOR_CAPTEUR_GLOBAL_H
+#define SENSOR_CAPTEUR_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SENSOR_CAPTEUR_LIBRARY)
+#  define SENSOR_CAPTEUR_EXPORT Q_DECL_EXPORT
+#else
+#  define SENSOR_CAPTEUR_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // SENSOR_CAPTEUR_GLOBAL_H

@@ -23,9 +23,14 @@ const int IrFront = 10;
 const int IrLeft = 9;
 const int IrRight = 8; 
 
+// Configuration des PIN_NEAR
+const int NearRightFront=A1 ; 
+const int NearRightBack =A2;
+const int NearLeftFront = A3;
+const int NearLeftBack = A4;
 
- 
 Robot robot = Robot();
+
 bool turnRight= false;
 bool turnLeft=false;
 void setup() {
@@ -35,14 +40,16 @@ void setup() {
   robot.addSensorFront(IrFront);
   robot.addSensorLeft(IrLeft);
   robot.addSensorRight(IrRight);
+  robot.addJail(NearRightFront,NearRightBack, NearLeftFront,NearLeftBack);  
   robot.arret();
-  
-
- delay(5000);
+  delay(2000);
 }
 
 void loop() {
-  
+  if (robot.isInJail())
+      robot.arret();
+  else{
+      
   if(robot.IRSensorRight.isBlackLine()){
       turnRight=true;
       turnLeft=false;
@@ -64,6 +71,7 @@ void loop() {
    }
   delay(20);
 }
+
 void avance100(){
    unsigned long distance=100;   // 100 cm
    unsigned long chrono=0;

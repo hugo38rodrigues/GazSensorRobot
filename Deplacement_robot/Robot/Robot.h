@@ -8,6 +8,8 @@
 #include "Arduino.h"
 #include "Moteur.h"
 #include "IRSensor.h"
+#include "Near_sensor.h"
+#include "jail.h"
 
 class Robot {
   public :
@@ -23,9 +25,14 @@ class Robot {
     void addSensorFront(int pinIr);
     void addSensorLeft(int pinIr);
     void addSensorRight(int pinIr);
+    void addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4);
+
+
+    Jail jail;
     IRSensor IRSensorFront;
     IRSensor IRSensorLeft;
     IRSensor IRSensorRight;
+
 
   private :
     Moteur _moteur1;
