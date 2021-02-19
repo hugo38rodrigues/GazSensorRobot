@@ -19,9 +19,9 @@ const int Driver2_M3 = 4;    // Violet
 const int Driver2_M4 = 3;    // Bleu
 
 // Configuration des PIN_IR
-const int IrFront = 10;
-const int IrLeft = 9;
-const int IrRight = 8; 
+const int IrFront = 10;     //Violet
+const int IrLeft = 9;       //Vert
+const int IrRight = 8;      //Marron
 
 // Configuration des PIN_NEAR
 const int NearRightFront=A1 ; 
