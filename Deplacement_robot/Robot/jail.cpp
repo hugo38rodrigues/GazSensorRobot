@@ -20,11 +20,9 @@ void Jail::setPins(int pinNear1, int pinNear2, int pinNear3, int pinNear4){
 }
 
 bool Jail::isInJail(){
- if(_isConfigured && _Near_sensor1.isNear() && _Near_sensor2.isNear() && _Near_sensor3.isNear() && _Near_sensor4.isNear()){
-
-     return true;
- }
- else
-     return false;
+    if(_isConfigured && _Near_sensor1.isNear() && _Near_sensor2.isNear() && _Near_sensor3.isNear() && _Near_sensor4.isNear())
+        return true;
+    else
+        return false;
 
 }

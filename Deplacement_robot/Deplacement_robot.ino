@@ -47,7 +47,7 @@ void setup() {
 
 void loop() {
   if (robot.isInJail())
-      robot.arret();
+      robot.stop();
   else{
       
   if(robot.IRSensorRight.isBlackLine()){
@@ -63,7 +63,7 @@ void loop() {
   if(robot.IRSensorFront.isBlackLine())
     robot.avance();
   else {
-    robot.arret();
+    robot.stop();
     if (turnLeft)
       robot.tourneGauche();
     else if (turnRight)
@@ -72,7 +72,7 @@ void loop() {
   delay(20);
 }
 
-void avance100(){
+void avance100() {
    unsigned long distance=100;   // 100 cm
    unsigned long chrono=0;
   if (chrono == 0) {
@@ -81,6 +81,6 @@ void avance100(){
   }
   // 1 cm = 20 ms
   else if ((millis() - chrono) > 20*distance) {
-    robot.arret();
+    robot.stop();
   }
 }

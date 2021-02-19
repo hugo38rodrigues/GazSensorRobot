@@ -6,7 +6,6 @@
 #define Robot_h
 
 #include "Arduino.h"
-#include "Moteur.h"
 #include "IRSensor.h"
 #include "Near_sensor.h"
 #include "jail.h"
@@ -14,9 +13,6 @@
 class Robot {
   public :
     Robot ();
-    void addMotor1(int pinActivation, int pinMoteur_H, int pinMoteur_A);
-    void addMotor2(int pinActivation, int pinMoteur_H, int pinMoteur_A);
-    void addMotor3(int pinActivation, int pinMoteur_H, int pinMoteur_A);
     void avance();
     void recule();
     void tourneDroite();
@@ -26,19 +22,15 @@ class Robot {
     void addSensorLeft(int pinIr);
     void addSensorRight(int pinIr);
     void addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4);
+    bool isInJail();
 
-
-    Jail jail;
     IRSensor IRSensorFront;
     IRSensor IRSensorLeft;
     IRSensor IRSensorRight;
 
-
   private :
-    Moteur _moteur1;
-    Moteur _moteur2;
-    Moteur _moteur3;
-
+    Jail _jail;
+    SpeedBox _speedBox;
 };
 
 #endif

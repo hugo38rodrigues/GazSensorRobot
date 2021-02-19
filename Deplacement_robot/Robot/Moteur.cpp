@@ -9,40 +9,24 @@ Moteur::Moteur(){
     _isConfigured = false;
 }
 
-void Moteur::setPins(int pinActivation, int pinMoteur_H, int pinMoteur_A){
-  // Configuration des pins moteur
-  pinMode (pinActivation, OUTPUT);
-  _pinActivation = pinActivation;
+void Moteur::setPins(int pinActivation){
+    // Configuration des pins moteur
+    // Utilisation de pin PWM pour contrôler la vitesse des moteurs
+    pinMode (pinActivation, OUTPUT);
+    _pinActivation = pinActivation;
 
-    pinMode (pinMoteur_H, OUTPUT);
-  _pinMoteur_H = pinMoteur_H;
-
-  pinMode (pinMoteur_A, OUTPUT);
-  _pinMoteur_A = pinMoteur_A;
-
-  _isConfigured = true;
+    _isConfigured = true;
 }
 
-void Moteur::go_horaire() {
+void Moteur::go() {
     if (_isConfigured) {
-        analogWrite(_pinActivation, LOW);
-        digitalWrite(_pinMoteur_H, LOW);
-        digitalWrite(_pinMoteur_A, HIGH);
-
-        analogWrite(_pinActivation, HIGH);
+        // Vitesse de 50%
+        analogWrite(_pinActivation, map (50, 0, 100, 0, 255));
     }
 }
 
-void Moteur::go_anti_horaire() {
-    if (_isConfigured) {
-        analogWrite(_pinActivation, LOW);
-        digitalWrite(_pinMoteur_H, HIGH);
-        digitalWrite(_pinMoteur_A, LOW);
-        analogWrite(_pinActivation, HIGH);
-    }
-}
-
-void Moteur::arret() {
+void Moteur::stop() {
     if (_isConfigured)
-        analogWrite(_pinActivation, LOW);
+        // Stop moteur
+        analogWrite(_pinActivation, 0);
 }
