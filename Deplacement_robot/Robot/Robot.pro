@@ -14,6 +14,7 @@ SOURCES += \
     Moteur.cpp \
     Near_sensor.cpp \
     Robot.cpp \
+    SpeedBox.cpp \
     jail.cpp
 
 HEADERS += \
@@ -22,6 +23,7 @@ HEADERS += \
     Near_sensor.h \
     Robot.h \
     Robot_global.h \
+    SpeedBox.h \
     jail.h
 
 # Default rules for deployment.

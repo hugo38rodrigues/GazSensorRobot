@@ -11,8 +11,8 @@ void setup() {
 void loop() {
   
  
-  //analogWrite(pinActivation,map(100, 0, 100, 0, 255));
-  digitalWrite(pinActivation, HIGH);
+  analogWrite(pinActivation,map(100, 0, 100, 0, 255));
+  //digitalWrite(pinActivation, HIGH);
   digitalWrite(pinMoteurM1, LOW);
   digitalWrite(pinMoteurM2,HIGH);
  

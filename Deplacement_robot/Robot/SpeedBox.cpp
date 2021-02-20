@@ -5,6 +5,7 @@
  */
 #include "Arduino.h"
 #include "Moteur.h"
+#include "SpeedBox.h"
 
 SpeedBox::SpeedBox(){
     _isConfigured = false;
@@ -38,7 +39,7 @@ void SpeedBox::addMotor3(int pinActivation) {
 
 void SpeedBox::avance() {
     _moteur1.stop();
-    _moteur2.stop()
+    _moteur2.stop();
     _moteur3.stop();
 
     // Set moteur1horaire + moteur2anti_horaire;
@@ -49,7 +50,7 @@ void SpeedBox::avance() {
 
 void SpeedBox::recule() {
     _moteur1.stop();
-    _moteur2.stop()
+    _moteur2.stop();
     _moteur3.stop();
 
     // Set moteur1antihoraire + moteur2horaire;
@@ -60,7 +61,7 @@ void SpeedBox::recule() {
 
 void SpeedBox::tourneDroite() {
     _moteur1.stop();
-    _moteur2.stop()
+    _moteur2.stop();
     _moteur3.stop();
 
    // Set moteur123antihoraire +
@@ -72,7 +73,7 @@ void SpeedBox::tourneDroite() {
 
 void SpeedBox::tourneGauche() {
     _moteur1.stop();
-    _moteur2.stop()
+    _moteur2.stop();
     _moteur3.stop();
 
    // Set moteur123horaire +
@@ -87,3 +88,8 @@ void SpeedBox::stop() {
     _moteur2.stop();
     _moteur3.stop();
 }
+
+int SpeedBox::getMoteur1Status() {
+    return _moteur1Horaire;
+}
+

@@ -13,23 +13,31 @@ class SpeedBox {
 public :
     SpeedBox();
     void setPins (int pinLatch, int clockPin, int dataPin);
-    void addMotor1(int pinActivation)
+    void addMotor1(int pinActivation);
     void addMotor2(int pinActivation);
-    void addMotor3(int pinActivation)
+    void addMotor3(int pinActivation);
     void avance();
     void recule();
     void tourneDroite();
     void tourneGauche();
     void stop();
+    int getMoteur1Status();
 
 private :
     bool _isConfigured;
     int _pinLatch;
-    int _clockPin,
+    int _clockPin;
     int _dataPin;
     Moteur _moteur1;
     Moteur _moteur2;
     Moteur _moteur3;
+
+    const int _moteur1Horaire        = 0b00000010;
+    const int _moteur1AntiHoraire    = 0b00000100;
+    const int _moteur2Horaire        = 0b00001000;
+    const int _moteur2AntiHoraire    = 0b00010000;
+    const int _moteur3Horaire        = 0b00100000;
+    const int _moteur3AntiHoraire    = 0b01000000;
 };
 
 #endif
