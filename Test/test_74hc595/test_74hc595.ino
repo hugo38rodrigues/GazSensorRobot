@@ -69,7 +69,7 @@ void updatePort(int port, bool state) {
   for (int j = 7 ; j >= 0; j--) {
     // Clock à l'état bas
     digitalWrite(clockPin, LOW);
-
+exit
     if (j == 7-port) {    // port Q1 
       digitalWrite(dataPin, state);
   }
