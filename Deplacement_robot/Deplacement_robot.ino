@@ -56,7 +56,7 @@ void setup() {
 }
 
 void loop() {
-  if (0==1 && robot.isInJail()) {
+  if (robot.isInJail()) {
     Serial.println("Robot en prison... Stop");
     robot.stop();
   }
