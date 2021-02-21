@@ -41,34 +41,24 @@ void SpeedBox::addMotor3(int pinActivation) {
 }
 
 void SpeedBox::avance() {
-    _moteur1.stop();
-    _moteur2.stop();
-    _moteur3.stop();
-
     // Set moteur1horaire + moteur2anti_horaire;
     UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire | _moteur3Horaire);
 
     _moteur1.go();
     _moteur2.go();
+    _moteur3.stop();
 }
 
 void SpeedBox::recule() {
-    _moteur1.stop();
-    _moteur2.stop();
-    _moteur3.stop();
-
     // Set moteur1antihoraire + moteur2horaire;
     UpdateMutex(_moteur1AntiHoraire | _moteur2Horaire | _moteur3Horaire);
 
     _moteur1.go();
     _moteur2.go();
+    _moteur3.stop();
 }
 
 void SpeedBox::tourneDroite() {
-    _moteur1.stop();
-    _moteur2.stop();
-    _moteur3.stop();
-
    // Set moteur123antihoraire +
     UpdateMutex(_moteur1AntiHoraire | _moteur2AntiHoraire| _moteur3AntiHoraire);
 
@@ -78,10 +68,6 @@ void SpeedBox::tourneDroite() {
 }
 
 void SpeedBox::tourneGauche() {
-    _moteur1.stop();
-    _moteur2.stop();
-    _moteur3.stop();
-
    // Set moteur123horaire +
     UpdateMutex(_moteur1Horaire | _moteur2Horaire | _moteur3Horaire);
 
