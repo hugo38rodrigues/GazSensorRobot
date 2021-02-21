@@ -1,86 +1,95 @@
 #include <Robot.h>
 
 // Configuration des PIN Driver 1
-const int Driver1_ENA = 11;   // Marron
-const int Driver1_M1 = 12;   // Rouge
-const int Driver1_M2 = 13;   // Orange
-
-const int Driver1_ENB = 0;    // N/A
-const int Driver1_M3 = 0;    // N/A
-const int Driver1_M4 = 0;    // N/A
+const int pin_shie1d1_ENA = 10;     // PWM Orange
+const int pin_shie1d1_ENB = 0;      // N/A
 
 // Configuration des PIN Driver 2
-const int Driver2_ENA = 7;    // Noir
-const int Driver2_M1 = 6;    // Blanc
-const int Driver2_M2 = 5;    // Gris
-
-const int Driver2_ENB = 2;    // Vert
-const int Driver2_M3 = 4;    // Violet
-const int Driver2_M4 = 3;    // Bleu
+const int pin_shie1d2_ENA = 3;      // PWM Gris
+const int pin_shie1d2_ENB = 5;      // PWM Vert
 
 // Configuration des PIN_IR
-const int IrFront = 10;     //Violet
-const int IrLeft = 9;       //Vert
-const int IrRight = 8;      //Marron
+const int pin_IrFront = 7;          // Orange
+const int pin_IrLeft = 9;           // Vert
+const int pin_IrRight = 8;          // Marron
 
 // Configuration des PIN_NEAR
-const int NearRightFront=A1 ; 
-const int NearRightBack =A2;
-const int NearLeftFront = A3;
-const int NearLeftBack = A4;
+const int pin_NearRightFront = A1;  //  
+const int pin_NearRightBack = A2;   //
+const int pin_NearLeftFront = A3;   //
+const int pin_NearLeftBack = A4;    //
+
+// Configuration des Pins du multiplexeur
+const int pinLatch = 12;          // Pin connected to ST_CP of 74HC595（Pin12）Orange
+const int pinClock = 13;          // Pin connected to SH_CP of 74HC595（Pin11）Blanc
+const int pinData = 11;           // Pin connected to DS of 74HC595（Pin14）Blanc
 
 Robot robot = Robot();
 
 bool turnRight= false;
 bool turnLeft=false;
+
 void setup() {
-  robot.addMotor1(Driver1_ENA, Driver1_M1, Driver1_M2); //Moteur_G
-  robot.addMotor2(Driver2_ENB, Driver2_M3, Driver2_M4); //Moteur_D
-  robot.addMotor3(Driver2_ENA, Driver2_M1, Driver2_M2); //Moteur_A
-  robot.addSensorFront(IrFront);
-  robot.addSensorLeft(IrLeft);
-  robot.addSensorRight(IrRight);
-  robot.addJail(NearRightFront,NearRightBack, NearLeftFront,NearLeftBack);  
-  robot.arret();
+  Serial.begin(9600);
+  while (!Serial);
+  
+  Serial.println("Setup configuration");
+
+  // Creation de la boite de vitesse
+  Serial.println("Creation de la boite de vitesse");
+  robot.addSpeedBox(pinLatch, pinClock, pinData);
+  robot._speedBox.addMotor1(pin_shie1d1_ENA);    // Moteur gauche
+  robot._speedBox.addMotor2(pin_shie1d2_ENA);    // Moteur droit
+  robot._speedBox.addMotor3(pin_shie1d2_ENB);    // Moteur arrière
+
+  Serial.println("Ajout des capteurs IR");
+  robot.addSensorFront(pin_IrFront);
+  robot.addSensorLeft(pin_IrLeft);
+  robot.addSensorRight(pin_IrRight);
+
+  Serial.println("Ajout des capteurs de la prison");
+  robot.addJail(pin_NearRightFront, pin_NearRightBack, pin_NearLeftFront, pin_NearLeftBack);  
+
+  Serial.println("Robot prêt... Attente 2\"");
+  robot.stop();
   delay(2000);
 }
 
 void loop() {
-  if (robot.isInJail())
-      robot.stop();
-  else{
-      
-  if(robot.IRSensorRight.isBlackLine()){
+  if (0==1 && robot.isInJail()) {
+    Serial.println("Robot en prison... Stop");
+    robot.stop();
+  }
+  
+  else {
+    if(robot.IRSensorRight.isBlackLine()){
+      Serial.println("Détection d'une ligne à droite");
       turnRight=true;
       turnLeft=false;
-  }
+    }
 
-  if(robot.IRSensorLeft.isBlackLine()){
-      turnRight=false;
-      turnLeft=true;
-  }
+    if(robot.IRSensorLeft.isBlackLine()){
+        Serial.println("Détection d'une ligne à gauche");
+        turnRight=false;
+        turnLeft=true;
+    }
       
-  if(robot.IRSensorFront.isBlackLine())
-    robot.avance();
-  else {
-    robot.stop();
-    if (turnLeft)
-      robot.tourneGauche();
-    else if (turnRight)
-      robot.tourneDroite();
-   }
+    if(robot.IRSensorFront.isBlackLine()) {
+      Serial.println("Détection d'une ligne devant");
+      robot.avance();
+    }
+    
+    else {
+      Serial.println("Aucune ligne détectée devant, arrêt du robot");
+      if (turnLeft){
+        Serial.println("Rotation vers la gauche");
+        robot.tourneGauche();
+      }
+      else if (turnRight){
+        robot.tourneDroite();
+        Serial.println("Rotation vers la gauche");
+      }
+    }
+  }
   delay(20);
-}
-
-void avance100() {
-   unsigned long distance=100;   // 100 cm
-   unsigned long chrono=0;
-  if (chrono == 0) {
-    chrono = millis();
-    robot.avance();
-  }
-  // 1 cm = 20 ms
-  else if ((millis() - chrono) > 20*distance) {
-    robot.stop();
-  }
 }
