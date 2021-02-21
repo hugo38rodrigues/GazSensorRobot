@@ -16,9 +16,8 @@ void Near_sensor::setPin(int pinNear){
 }
 
 bool Near_sensor::isNear(){
-   if ( analogRead(_pinNear) > 1023*1.3/5)      //d'apres l abbaque 1.3V correspond à 10 cm
+   if (_isConfigured && analogRead(_pinNear) > 1023*1.3/5)      //d'apres l abbaque 1.3V correspond à 10 cm
        return true;
-
    else
        return false;
 }

@@ -8,17 +8,22 @@
 #include "IRSensor.h"
 #include "Near_sensor.h"
 #include "jail.h"
+#include "SpeedBox.h"
 
 Robot::Robot() {
     IRSensorFront = IRSensor();
     IRSensorLeft = IRSensor();
     IRSensorRight = IRSensor();
     _jail = Jail();
-    _speedBox = SpeedBox()
+    _speedBox = SpeedBox();
 }
 
-void Robot::addSpeedBox (int pinLatch, int clockPin, int dataPin) {
-    _speedBox.setPins(pinLatch, clockPin, dataPin);
+void Robot::addSpeedBox (int pinLatch, int pinClock, int pinData) {
+    _speedBox.setPins(pinLatch, pinClock, pinData);
+}
+
+SpeedBox Robot::getSpeedBox() {
+    return _speedBox;
 }
 
 void Robot::addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4){
@@ -45,7 +50,7 @@ void Robot::avance() {
 }
 
 void Robot::recule() {
-    _speedBox.recule()
+    _speedBox.recule();
 }
 
 void Robot::tourneDroite() {

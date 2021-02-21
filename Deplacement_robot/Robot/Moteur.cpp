@@ -20,13 +20,16 @@ void Moteur::setPins(int pinActivation){
 
 void Moteur::go() {
     if (_isConfigured) {
+        Serial.println ("Go motor, speed 80%");
         // Vitesse de 50%
-        analogWrite(_pinActivation, map (50, 0, 100, 0, 255));
+        analogWrite(_pinActivation, map (80, 0, 100, 0, 255));
     }
 }
 
 void Moteur::stop() {
-    if (_isConfigured)
+    if (_isConfigured) {
+        Serial.println("Stop motor");
         // Stop moteur
         analogWrite(_pinActivation, 0);
+    }
 }
