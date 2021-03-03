@@ -11,7 +11,7 @@ class Moteur {
 public :
     Moteur();
     void setPins (int pinActivation);
-    void go();
+    void go(int vitesse);
     void stop();
 
 private :

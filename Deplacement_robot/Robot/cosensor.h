@@ -7,8 +7,8 @@
 #define COSENSOR_H
 #include "Arduino.h"
 
-class COSensor
-{
+class COSensor{
+
 public:
     COSensor();
     void setPin(int pinCo);

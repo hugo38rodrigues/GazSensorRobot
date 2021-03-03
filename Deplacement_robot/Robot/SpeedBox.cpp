@@ -14,7 +14,7 @@ SpeedBox::SpeedBox() {
     _moteur3 = Moteur();
     _pinLatch = 0;
     _pinClock = 0;
-    _pinData = 0;
+    _pinData  = 0;
 }
 
 void SpeedBox::setPins (int pinLatch, int pinClock, int pinData) {
@@ -44,8 +44,8 @@ void SpeedBox::avance() {
     // Set moteur1horaire + moteur2anti_horaire;
     UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire | _moteur3Horaire);
 
-    _moteur1.go();
-    _moteur2.go();
+    _moteur1.go(80);
+    _moteur2.go(80);
     _moteur3.stop();
 }
 
@@ -53,8 +53,8 @@ void SpeedBox::recule() {
     // Set moteur1antihoraire + moteur2horaire;
     UpdateMutex(_moteur1AntiHoraire | _moteur2Horaire | _moteur3Horaire);
 
-    _moteur1.go();
-    _moteur2.go();
+    _moteur1.go(50);
+    _moteur2.go(50);
     _moteur3.stop();
 }
 
@@ -62,18 +62,18 @@ void SpeedBox::tourneDroite() {
    // Set moteur123antihoraire +
     UpdateMutex(_moteur1AntiHoraire | _moteur2AntiHoraire| _moteur3AntiHoraire);
 
-    _moteur1.go();
-    _moteur2.go();
-    _moteur3.go();
+    _moteur1.go(50);
+    _moteur2.go(50);
+    _moteur3.go(50);
 }
 
 void SpeedBox::tourneGauche() {
    // Set moteur123horaire +
     UpdateMutex(_moteur1Horaire | _moteur2Horaire | _moteur3Horaire);
 
-    _moteur1.go();
-    _moteur2.go();
-    _moteur3.go();
+    _moteur1.go(50);
+    _moteur2.go(50);
+    _moteur3.go(50);
 }
 
 void SpeedBox::stop() {

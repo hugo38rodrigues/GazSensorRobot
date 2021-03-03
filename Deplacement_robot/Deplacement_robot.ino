@@ -26,7 +26,7 @@ const int pinData = 11;           // Pin connected to DS of 74HC595（Pin14）Bl
 
 Robot robot = Robot();
 
-bool turnRight= false;
+bool turnRight=false;
 bool turnLeft=false;
 
 void setup() {

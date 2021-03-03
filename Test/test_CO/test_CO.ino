@@ -25,7 +25,7 @@ float           COCurve[3]  =  {2.3,0.72,-0.34};    //two points are taken from 
                                                     //with these two points, a line is formed which is "approximately equivalent" 
                                                     //to the original curve.
                                                     //data format:{ x, y, slope}; point1: (lg200, 0.72), point2: (lg10000,  0.15) 
-float           SmokeCurve[3] ={2.3,0.53,-0.44};    //two points are taken from the curve. 
+float           SmokeCurve[3] = {2.3,0.53,-0.44};    //two points are taken from the curve. 
                                                     //with these two points, a line is formed which is "approximately equivalent" 
                                                     //to the original curve.
                                                     //data format:{ x, y, slope}; point1: (lg200, 0.53), point2: (lg10000,  -0.22)                                                     
