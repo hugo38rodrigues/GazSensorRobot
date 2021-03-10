@@ -13,6 +13,7 @@ public:
     COSensor();
     void setPin(int pinCo);
     bool DetecteCo();
+    void CalibCo();
 private:
     bool _isConfigured;
     int _pinCo;

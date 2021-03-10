@@ -11,15 +11,14 @@ void COSensor::setPin(int pinCo){
 }
 
 bool COSensor::DetecteCo(){
-   analogRead (_pinCo)
-   if
+   analogRead (_pinCo);
+/*   if
         return true;
     else
+        return false;*/
         return false;
 }
-void COSensor:: CalibCo(){
 
-
-
+void COSensor:: CalibCo() {
 
 }
