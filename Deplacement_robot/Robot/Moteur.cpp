@@ -22,7 +22,7 @@ void Moteur::go(int vitesse) {
     if (_isConfigured) {
         Serial.println ("Go motor, speed 80%");
         // Vitesse de 50%
-        analogWrite(_pinActivation, map (vitesse, 0, 100, 0, 255));
+        analogWrite(_pinActivation, map (vitesse, 80, 100, 0, 255));
     }
 }
 

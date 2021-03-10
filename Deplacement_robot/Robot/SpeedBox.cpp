@@ -60,7 +60,7 @@ void SpeedBox::recule() {
 
 void SpeedBox::tourneDroite() {
    // Set moteur123antihoraire +
-    UpdateMutex(_moteur1AntiHoraire | _moteur2AntiHoraire| _moteur3AntiHoraire);
+    UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire| _moteur3AntiHoraire);
 
     _moteur1.go(50);
     _moteur2.go(50);
@@ -69,7 +69,7 @@ void SpeedBox::tourneDroite() {
 
 void SpeedBox::tourneGauche() {
    // Set moteur123horaire +
-    UpdateMutex(_moteur1Horaire | _moteur2Horaire | _moteur3Horaire);
+    UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire | _moteur3Horaire);
 
     _moteur1.go(50);
     _moteur2.go(50);
