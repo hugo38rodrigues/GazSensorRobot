@@ -10,10 +10,11 @@
 #include "Near_sensor.h"
 #include "jail.h"
 #include "SpeedBox.h"
-
+#include "cosensor.h"
 class Robot {
   public :
     Robot ();
+    bool detecteCo();
     void avance();
     void recule();
     void tourneDroite();
@@ -25,15 +26,16 @@ class Robot {
     void addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4);
     bool isInJail();
     void addSpeedBox (int pinLatch, int pinClock, int pinData);
-    SpeedBox getSpeedBox();
-    SpeedBox _speedBox;
+    void addSensor(int pinSensor);
 
     IRSensor IRSensorFront;
     IRSensor IRSensorLeft;
     IRSensor IRSensorRight;
-
+    SpeedBox speedBox;
   private :
     Jail _jail;
+    COSensor _sensor;
+
 };
 
 #endif

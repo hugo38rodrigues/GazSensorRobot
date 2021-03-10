@@ -24,6 +24,11 @@ const int pinLatch = 12;          // Pin connected to ST_CP of 74HC595（Pin12�
 const int pinClock = 13;          // Pin connected to SH_CP of 74HC595（Pin11）Blanc
 const int pinData = 11;           // Pin connected to DS of 74HC595（Pin14）Blanc
 
+// Configuration des Pins du capteur Co et fumée
+const int pinSensor = ;
+
+
+
 Robot robot = Robot();
 
 bool turnRight=false;
@@ -34,13 +39,15 @@ void setup() {
   while (!Serial);
   
   Serial.println("Setup configuration");
+  // Creation du capteur 
+  robot.addSensor(pinSensor);
 
   // Creation de la boite de vitesse
   Serial.println("Creation de la boite de vitesse");
   robot.addSpeedBox(pinLatch, pinClock, pinData);
-  robot._speedBox.addMotor1(pin_shie1d1_ENA);    // Moteur gauche
-  robot._speedBox.addMotor2(pin_shie1d2_ENA);    // Moteur droit
-  robot._speedBox.addMotor3(pin_shie1d2_ENB);    // Moteur arrière
+  robot.speedBox.addMotor1(pin_shie1d1_ENA);    // Moteur gauche
+  robot.speedBox.addMotor2(pin_shie1d2_ENA);    // Moteur droit
+  robot.speedBox.addMotor3(pin_shie1d2_ENB);    // Moteur arrière
 
   Serial.println("Ajout des capteurs IR");
   robot.addSensorFront(pin_IrFront);
@@ -56,13 +63,18 @@ void setup() {
 }
 
 void loop() {
-  if (robot.isInJail()) {
+  if (robot.isInJail()){
     Serial.println("Robot en prison... Stop");
     robot.stop();
   }
-  
+  else if (robot.detectCo()){
+    Serial.println("Détection de CO ou de fumée ");
+    robot.stop();
+    //robot.camera();
+  }
   else {
-    if(robot.IRSensorRight.isBlackLine()){
+    
+   /* if(robot.IRSensorRight.isBlackLine()){
       Serial.println("Détection d'une ligne à droite");
       turnRight=true;
       turnLeft=false;
@@ -88,7 +100,7 @@ void loop() {
       else if (turnRight){
         robot.tourneDroite();
         Serial.println("Rotation vers la gauche");
-      }
+     */ }
     }
   }
   delay(20);

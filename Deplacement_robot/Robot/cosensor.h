@@ -12,11 +12,11 @@ class COSensor{
 public:
     COSensor();
     void setPin(int pinCo);
-    bool DetecteCo();
-    void CalibCo();
+    bool detecteCo();
+    void calibCo();
 private:
     bool _isConfigured;
-    int _pinCo;
+    int _pinSensor;
 };
 
 #endif // COSENSOR_H
