@@ -31,10 +31,11 @@ const int pinSensor = ;
 
 Robot robot = Robot();
 
-bool turnRight=false;
-bool turnLeft=false;
+//bool turnRight=false;
+//bool turnLeft=false;
 
-void setup() {
+void setup() 
+{
   Serial.begin(9600);
   while (!Serial);
   
@@ -63,17 +64,32 @@ void setup() {
 }
 
 void loop() {
-  if (robot.isInJail()){
+  if (robot.isInJail())
+  {
     Serial.println("Robot en prison... Stop");
     robot.stop();
   }
-  else if (robot.detectCo()){
+  else if (robot.detectCo())
+  {
     Serial.println("Détection de CO ou de fumée ");
     robot.stop();
     //robot.camera();
   }
-  else {
-    
+  else{
+    if(robot.IRSensorFront.isBlackLine())
+    {
+      if((robot.IRSensorLeft.isBlackLine) && (!robot.IRSensorRight.isBlackLine))
+      {
+        robot.tourneGauche();
+      }
+      else if ((!robot.IRSensorLeft.isBlackLine) && (robot.IRSensorRight.isBlackLine)
+      {
+        robot.tourneDroite();
+      }
+      else
+      {
+        robot.avance();
+      }
    /* if(robot.IRSensorRight.isBlackLine()){
       Serial.println("Détection d'une ligne à droite");
       turnRight=true;
