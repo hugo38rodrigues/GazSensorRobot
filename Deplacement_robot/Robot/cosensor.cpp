@@ -1,5 +1,6 @@
 #include "cosensor.h"
 #include "Arduino.h"
+
 COSensor::COSensor()
 {
     _isConfigured = false;

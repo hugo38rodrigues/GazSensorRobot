@@ -25,9 +25,10 @@ const int pinClock = 13;          // Pin connected to SH_CP of 74HC595（Pin11�
 const int pinData = 11;           // Pin connected to DS of 74HC595（Pin14）Blanc
 
 // Configuration des Pins du capteur Co et fumée
-const int pinSensor = ;
+const int pinSensor = A0;
 
-
+//Configuration de la Pin du Nano
+const int pinNano = 2;
 
 Robot robot = Robot();
 
@@ -58,6 +59,9 @@ void setup()
   Serial.println("Ajout des capteurs de la prison");
   robot.addJail(pin_NearRightFront, pin_NearRightBack, pin_NearLeftFront, pin_NearLeftBack);  
 
+  Serial.println("activation du Nano")
+  pinMode(pinNano,OUTPUT);
+
   Serial.println("Robot prêt... Attente 2\"");
   robot.stop();
   delay(2000);
@@ -69,11 +73,13 @@ void loop() {
     Serial.println("Robot en prison... Stop");
     robot.stop();
   }
-  else if (robot.detectCo())
+  else if (robot.DetectCo())
   {
     Serial.println("Détection de CO ou de fumée ");
     robot.stop();
-    //robot.camera();
+    digitalWrite(pinNano==HIGH);
+    
+    //robot.Actifcamera();
   }
   else{
     if(robot.IRSensorFront.isBlackLine())
