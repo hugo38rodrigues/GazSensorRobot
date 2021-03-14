@@ -59,7 +59,7 @@ void setup()
   Serial.println("Ajout des capteurs de la prison");
   robot.addJail(pin_NearRightFront, pin_NearRightBack, pin_NearLeftFront, pin_NearLeftBack);  
 
-  Serial.println("activation du Nano")
+  Serial.println("activation du Nano");
   pinMode(pinNano,OUTPUT);
 
   Serial.println("Robot prêt... Attente 2\"");
