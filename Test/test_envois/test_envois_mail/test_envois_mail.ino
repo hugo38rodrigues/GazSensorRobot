@@ -61,7 +61,7 @@ void SendMail(){
     message.subject = "Robot detection";
     message.message = "Detection CO";
 
-    // Send to 3 different email
+    // Send email
     const char* arrayOfEmail[] = {"hugo38.rodrigues@gmail.com"};
     EMailSender::Response resp = emailSend.send(arrayOfEmail, 1, message);
 
