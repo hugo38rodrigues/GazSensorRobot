@@ -14,10 +14,10 @@ public:
     void setPin(int pinSensor);
     bool detecteCo();
     void calibCo();
-    int pinSensor;
+
 private:
     bool _isConfigured;
-
+    int _pinSensor;
 };
 
 #endif // COSENSOR_H

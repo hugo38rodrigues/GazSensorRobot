@@ -7,12 +7,12 @@ COSensor::COSensor()
 }
 void COSensor::setPin(int pinSensor){
     pinMode (pinSensor, INPUT);
-   // pinSensor=pinSensor;
+   _pinSensor=pinSensor;
     _isConfigured = true;
 }
 
 bool COSensor::detecteCo(){
-   int val = analogRead (pinSensor);
+   int val = analogRead (_pinSensor);
    Serial.println("valeur CO:" + String(val));
 
    if (_isConfigured && val > 350)
