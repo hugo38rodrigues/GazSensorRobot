@@ -62,7 +62,7 @@ void SendMail(){
     message.message = "Detection CO";
 
     // Send email
-    const char* arrayOfEmail[] = {"hugo38.rodrigues@gmail.com"};
+    const char* arrayOfEmail[] = {"hugo38.test1@gmail.com"};
     EMailSender::Response resp = emailSend.send(arrayOfEmail, 1, message);
 
 //    // Send to 3 different email, 2 in C and 1 in CC
@@ -94,9 +94,9 @@ void setup()
 
 void loop()
 {
-  if(digitalRead(2) ==LOW){
+  if(digitalRead(2) ==HIGH){
     Serial.println("debut de sendmail");
     SendMail();
   }
-  delay(100);
+  delay(10);
 }
