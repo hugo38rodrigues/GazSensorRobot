@@ -29,6 +29,7 @@ const int pinSensor = A0;
 
 //Configuration de la Pin du wifi
 const int pinWifi = 2;
+int compteur =0;
 
 Robot robot = Robot();
 
@@ -37,6 +38,7 @@ Robot robot = Robot();
 
 void setup() 
 {
+  pinMode(pinWifi,OUTPUT);
   Serial.begin(9600);
   while (!Serial);
   
@@ -45,7 +47,7 @@ void setup()
   robot.addSensor(pinSensor);
   
   Serial.println("Creation du module wifi");
-  //robot.addwifi(pinWifi);
+  
   // Creation de la boite de vitesse
   Serial.println("Creation de la boite de vitesse");
   robot.addSpeedBox(pinLatch, pinClock, pinData);
@@ -68,33 +70,63 @@ void setup()
 }
 
 void loop() {
+  digitalWrite(pinWifi,LOW);
   if (robot.isInJail())
   {
     Serial.println("Robot en prison... Stop");
     robot.stop();
   }
-  else if (robot.detectCo())
+    else if (robot.detecteCo())
   {
     Serial.println("Détection de CO ou de fumée ");
     robot.stop();
-    digitalWrite(pinWifi==HIGH);
-    
+    compteur ++;
+    if(compteur == 1){
+      Serial.println("send mail");
+      digitalWrite(pinWifi,HIGH);
+    }
+    //500 * le delai de la boucle
+    if(compteur > 5)     
+      compteur = 0;
   }
-  else{
-    if(robot.IRSensorFront.isBlackLine())
-    {
-      if((robot.IRSensorLeft.isBlackLine) && (!robot.IRSensorRight.isBlackLine))
+  else {
+     if(robot.IRSensorFront.isBlackLine()) //Si le capteur du centre détecte du noir
+     {
+      if ((robot.IRSensorLeft.isBlackLine()) && (!robot.IRSensorRight.isBlackLine())) //S'il y a du noir à gauche et du blanc à droite, tourner à gauche
       {
+        Serial.println("Tourner à gauche");
         robot.tourneGauche();
       }
-      else if ((!robot.IRSensorLeft.isBlackLine) && (robot.IRSensorRight.isBlackLine)
+      else if ((!robot.IRSensorLeft.isBlackLine()) && (robot.IRSensorRight.isBlackLine())) //S'il y a du blanc à gauche et du noir à droite, tourner à droite
       {
+        Serial.println("Tourner à droite");
         robot.tourneDroite();
       }
-      else
+      else //Si les conditions plus haut ne s'appliquent pas, continuer tout droit
       {
+        Serial.println("Continuer tout droit");
         robot.avance();
       }
+    }
+    else //Si le capteur du centre détecte du blanc
+    {
+      if ((robot.IRSensorLeft.isBlackLine()) && (!robot.IRSensorRight.isBlackLine())) //S'il y a du noir à gauche et du blanc à droite, tourner à gauche
+      {
+        Serial.println("Tourner à gauche");
+        robot.tourneGauche();
+      }
+      else if ((!robot.IRSensorLeft.isBlackLine()) && (robot.IRSensorRight.isBlackLine())) //S'il y a du blanc à gauche et du noir à droite, tourner à droite
+      {
+        Serial.println("Tourner à droite");
+        robot.tourneDroite();
+      }
+      else //Si les conditions plus hautd ne s'appliquent pas, reculer
+      {
+        Serial.println(" ");
+        robot.stop();
+      
+      }
+    } 
    /* if(robot.IRSensorRight.isBlackLine()){
       Serial.println("Détection d'une ligne à droite");
       turnRight=true;
@@ -121,8 +153,10 @@ void loop() {
       else if (turnRight){
         robot.tourneDroite();
         Serial.println("Rotation vers la gauche");
-     */ }
-    }
+      }
+    }*/
+  
+  
   }
-  delay(20);
+  delay(2000);
 }
