@@ -32,10 +32,9 @@ class Robot {
     IRSensor IRSensorLeft;
     IRSensor IRSensorRight;
     SpeedBox speedBox;
+    COSensor _sensor;
   private :
     Jail _jail;
-    COSensor _sensor;
-
 };
 
 #endif

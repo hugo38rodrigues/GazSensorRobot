@@ -22,7 +22,7 @@ Robot::Robot() {
 }
 
 void Robot::addSensor(int pinSensor){
-  _sensor.setPin(pinSensor);
+    _sensor.setPin(pinSensor);
 }
 
 void Robot::addSpeedBox (int pinLatch, int pinClock, int pinData) {

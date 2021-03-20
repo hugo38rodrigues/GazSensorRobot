@@ -27,8 +27,8 @@ const int pinData = 11;           // Pin connected to DS of 74HC595（Pin14）Bl
 // Configuration des Pins du capteur Co et fumée
 const int pinSensor = A0;
 
-//Configuration de la Pin du Nano
-const int pinNano = 2;
+//Configuration de la Pin du wifi
+const int pinWifi = 2;
 
 Robot robot = Robot();
 
@@ -43,7 +43,9 @@ void setup()
   Serial.println("Setup configuration");
   // Creation du capteur 
   robot.addSensor(pinSensor);
-
+  
+  Serial.println("Creation du module wifi");
+  //robot.addwifi(pinWifi);
   // Creation de la boite de vitesse
   Serial.println("Creation de la boite de vitesse");
   robot.addSpeedBox(pinLatch, pinClock, pinData);
@@ -59,8 +61,6 @@ void setup()
   Serial.println("Ajout des capteurs de la prison");
   robot.addJail(pin_NearRightFront, pin_NearRightBack, pin_NearLeftFront, pin_NearLeftBack);  
 
-  Serial.println("activation du Nano");
-  pinMode(pinNano,OUTPUT);
 
   Serial.println("Robot prêt... Attente 2\"");
   robot.stop();
@@ -73,13 +73,12 @@ void loop() {
     Serial.println("Robot en prison... Stop");
     robot.stop();
   }
-  else if (robot.DetectCo())
+  else if (robot.detectCo())
   {
     Serial.println("Détection de CO ou de fumée ");
     robot.stop();
-    digitalWrite(pinNano==HIGH);
+    digitalWrite(pinWifi==HIGH);
     
-    //robot.Actifcamera();
   }
   else{
     if(robot.IRSensorFront.isBlackLine())
