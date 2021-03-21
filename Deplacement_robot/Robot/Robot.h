@@ -11,10 +11,12 @@
 #include "jail.h"
 #include "SpeedBox.h"
 #include "cosensor.h"
+#include "contactsensor.h"
 class Robot {
   public :
     Robot ();
     bool detecteCo();
+    bool detecteContact();
     void avance();
     void recule();
     void tourneDroite();
@@ -26,13 +28,15 @@ class Robot {
     void addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4);
     bool isInJail();
     void addSpeedBox (int pinLatch, int pinClock, int pinData);
-    void addSensor(int pinSensor);
+    void addCOSensor(int pinCOSensor);
+    void addContact(int pinContact);
 
     IRSensor IRSensorFront;
     IRSensor IRSensorLeft;
     IRSensor IRSensorRight;
     SpeedBox speedBox;
-    COSensor _sensor;
+    COSensor _COSensor;
+    contactsensor _ContactSensor;
   private :
     Jail _jail;
 };

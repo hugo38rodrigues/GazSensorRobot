@@ -25,7 +25,10 @@ const int pinClock = 13;          // Pin connected to SH_CP of 74HC595（Pin11�
 const int pinData = 11;           // Pin connected to DS of 74HC595（Pin14）Blanc
 
 // Configuration des Pins du capteur Co et fumée
-const int pinSensor = A0;
+const int pinCOSensor = A0;
+
+//Configuration des Pins du capteur de contacte
+const int pinContactSensor =4;
 
 //Configuration de la Pin du wifi
 const int pinWifi = 2;
@@ -38,15 +41,17 @@ Robot robot = Robot();
 
 void setup() 
 {
-  pinMode(pinWifi,OUTPUT);
+  
   Serial.begin(9600);
-  while (!Serial);
   
   Serial.println("Setup configuration");
   // Creation du capteur 
-  robot.addSensor(pinSensor);
+  robot.addCOSensor(pinCOSensor);
   
+  // Creation du wifi
   Serial.println("Creation du module wifi");
+  pinMode(pinWifi,OUTPUT);
+  digitalWrite(pinWifi,LOW);
   
   // Creation de la boite de vitesse
   Serial.println("Creation de la boite de vitesse");
@@ -62,7 +67,9 @@ void setup()
 
   Serial.println("Ajout des capteurs de la prison");
   robot.addJail(pin_NearRightFront, pin_NearRightBack, pin_NearLeftFront, pin_NearLeftBack);  
-
+  
+  Serial.println("ajout du capteur contacte");
+  robot.addContact(pinContactSensor);
 
   Serial.println("Robot prêt... Attente 2\"");
   robot.stop();
@@ -71,22 +78,24 @@ void setup()
 
 void loop() {
   digitalWrite(pinWifi,LOW);
-  if (robot.isInJail())
+  if ((robot.isInJail() || robot.detecteContact()))
   {
-    Serial.println("Robot en prison... Stop");
+    Serial.println("Robot en prison... Stop ou capteur touché");
     robot.stop();
   }
     else if (robot.detecteCo())
   {
-    Serial.println("Détection de CO ou de fumée ");
+    Serial.println("Détection de CO ou de fumée ("+String(compteur)+")");
     robot.stop();
     compteur ++;
     if(compteur == 1){
       Serial.println("send mail");
       digitalWrite(pinWifi,HIGH);
+      delay(150);
+      digitalWrite(pinWifi,LOW);
     }
     //500 * le delai de la boucle
-    if(compteur > 5)     
+    if(compteur > 500)     
       compteur = 0;
   }
   else {
@@ -158,5 +167,5 @@ void loop() {
   
   
   }
-  delay(2000);
+  delay(20);
 }
