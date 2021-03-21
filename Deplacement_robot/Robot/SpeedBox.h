@@ -35,8 +35,8 @@ private :
     // Bits 5 et 6 gère le sens de rotation du moteur 1
     // 5 LOW, 6 HIGH : Sens rotation horaire
     // 5 HIGH, 6 LOW : Sens rotation anti-horaire
-    int _moteur1Horaire        = 0b01000000;        // Q6 sur le 74HC595
-    int _moteur1AntiHoraire    = 0b00100000;        // Q5 sur le 74HC595
+    int _moteur1Horaire = 0b00100000 ;        // Q6 sur le 74HC595
+    int _moteur1AntiHoraire =0b01000000;        // Q5 sur le 74HC595
 
     // Bits 3 et 4 gère le sens de rotation du moteur 2
     // 4 LOW, 3 HIGH : Sens rotation horaire
