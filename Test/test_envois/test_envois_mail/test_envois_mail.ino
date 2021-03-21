@@ -98,5 +98,5 @@ void loop()
     Serial.println("debut de sendmail");
     SendMail();
   }
-  delay(10);
+  delay(100);
 }
