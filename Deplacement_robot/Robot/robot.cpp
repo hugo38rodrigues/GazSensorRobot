@@ -10,7 +10,7 @@
 #include "jail.h"
 #include "SpeedBox.h"
 #include "cosensor.h"
-
+#include "contactsensor.h"
 
 Robot::Robot() {
     IRSensorFront = IRSensor();
@@ -18,11 +18,14 @@ Robot::Robot() {
     IRSensorRight = IRSensor();
     _jail = Jail();
     speedBox = SpeedBox();
-    _sensor = COSensor();
+    _COSensor = COSensor();
+    _ContactSensor = contactsensor();
 }
-
-void Robot::addSensor(int pinSensor){
-    _sensor.setPin(pinSensor);
+void Robot::addContact(int pinContact){
+    _ContactSensor.setPin(pinContact);
+}
+void Robot::addCOSensor(int pinCOSensor){
+    _COSensor.setPin(pinCOSensor);
 }
 
 void Robot::addSpeedBox (int pinLatch, int pinClock, int pinData) {
@@ -44,9 +47,11 @@ void Robot::addSensorRight(int pinIr){
     IRSensorRight.setPin(pinIr);
 }
 
-
+bool Robot::detecteContact(){
+    return _ContactSensor.detectcontact();
+}
 bool Robot::detecteCo(){
-    return _sensor.detecteCo();
+    return _COSensor.detecteCo();
 }
 
 

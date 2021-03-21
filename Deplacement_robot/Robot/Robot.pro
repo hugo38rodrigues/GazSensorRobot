@@ -15,6 +15,7 @@ SOURCES += \
     Near_sensor.cpp \
     Robot.cpp \
     SpeedBox.cpp \
+    contactsensor.cpp \
     cosensor.cpp \
     jail.cpp
 
@@ -25,6 +26,7 @@ HEADERS += \
     Robot.h \
     Robot_global.h \
     SpeedBox.h \
+    contactsensor.h \
     cosensor.h \
     jail.h
 
