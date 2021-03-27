@@ -21,6 +21,9 @@ class Robot {
     void recule();
     void tourneDroite();
     void tourneGauche();
+    void Robot::ajusteDroite();
+    void Robot::ajusteGauche();
+
     void stop();
     void addSensorFront(int pinIr);
     void addSensorLeft(int pinIr);
@@ -37,7 +40,8 @@ class Robot {
     SpeedBox speedBox;
     COSensor _COSensor;
     contactsensor _ContactSensor;
-  private :
+
+private :
     Jail _jail;
 };
 

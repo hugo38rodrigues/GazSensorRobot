@@ -45,9 +45,9 @@ void SpeedBox::avance() {
     UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire | _moteur3Horaire);
 
     Serial.println("moteur 1");
-    _moteur1.go(80);
+    _moteur1.go(92);
     Serial.println("moteur 2");
-    _moteur2.go(80);
+    _moteur2.go(65);
     Serial.println("moteur 3");
     _moteur3.stop();
 }
@@ -61,26 +61,48 @@ void SpeedBox::recule() {
     _moteur3.stop();
 }
 
+void SpeedBox::ajusteDroite(){
+   // Set moteur123antihoraire +
+    UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire| _moteur3AntiHoraire);
+    Serial.println("moteur 1");
+    _moteur1.go(92);
+    Serial.println("moteur 2");
+    _moteur2.go(65);
+    Serial.println("moteur 3");
+    _moteur3.go(80);
+}
+
 void SpeedBox::tourneDroite(){
    // Set moteur123antihoraire +
     UpdateMutex(_moteur1AntiHoraire | _moteur2AntiHoraire| _moteur3AntiHoraire);
     Serial.println("moteur 1");
-    _moteur1.go(60);
+    _moteur1.go(92);
     Serial.println("moteur 2");
-    _moteur2.go(60);
+    _moteur2.go(65);
     Serial.println("moteur 3");
-    _moteur3.go(60);
+    _moteur3.go(80);
 }
 
 void SpeedBox::tourneGauche(){
    // Set moteur123horaire +
     UpdateMutex(_moteur1Horaire | _moteur2Horaire | _moteur3Horaire);
     Serial.println("moteur 1");
-    _moteur1.go(60);
+    _moteur1.go(92);
     Serial.println("moteur 2");
-    _moteur2.go(60);
+    _moteur2.go(65);
     Serial.println("moteur 3");
-    _moteur3.go(60);
+    _moteur3.go(80);
+}
+
+void SpeedBox::ajusteGauche(){
+   // Set moteur123horaire +
+    UpdateMutex(_moteur1Horaire | _moteur2AntiHoraire | _moteur3Horaire);
+    Serial.println("moteur 1");
+    _moteur1.go(92);
+    Serial.println("moteur 2");
+    _moteur2.go(65);
+    Serial.println("moteur 3");
+    _moteur3.go(80);
 }
 
 void SpeedBox::stop(){

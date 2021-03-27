@@ -20,6 +20,8 @@ public :
     void recule();
     void tourneDroite();
     void tourneGauche();
+    void ajusteDroite();
+    void ajusteGauche();
     void stop();
 
 
