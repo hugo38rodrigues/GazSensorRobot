@@ -5,6 +5,7 @@ COSensor::COSensor()
 {
     _isConfigured = false;
 }
+
 void COSensor::setPin(int pinSensor){
     pinMode (pinSensor, INPUT);
    _pinSensor=pinSensor;
