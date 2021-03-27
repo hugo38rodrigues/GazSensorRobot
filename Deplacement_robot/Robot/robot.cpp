@@ -33,7 +33,7 @@ void Robot::addSpeedBox (int pinLatch, int pinClock, int pinData) {
 }
 
 void Robot::addJail(int pinNear1, int pinNear2, int pinNear3, int pinNear4){
-    _jail.setPins(pinNear1, pinNear2,pinNear3, pinNear4);
+    _jail.setPins(pinNear1, pinNear2, pinNear3, pinNear4);
 }
 
 void Robot::addSensorFront(int pinIr){
@@ -69,6 +69,14 @@ void Robot::tourneDroite() {
 
 void Robot::tourneGauche() {
     speedBox.tourneGauche();
+}
+
+void Robot::ajusteDroite() {
+    speedBox.ajusteDroite();
+}
+
+void Robot::ajusteGauche() {
+    speedBox.ajusteGauche();
 }
 
 void Robot::stop() {
