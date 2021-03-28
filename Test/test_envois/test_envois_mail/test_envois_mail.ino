@@ -57,7 +57,7 @@ void Awaits()
     }
 }
 void SendMail(){
-   EMailSender::EMailMessage message;
+    EMailSender::EMailMessage message;
     message.subject = "Robot detection";
     message.message = "Detection CO";
 
@@ -65,14 +65,7 @@ void SendMail(){
     const char* arrayOfEmail[] = {"hugo38.test1@gmail.com"};
     EMailSender::Response resp = emailSend.send(arrayOfEmail, 1, message);
 
-//    // Send to 3 different email, 2 in C and 1 in CC
-//    const char* arrayOfEmail[] = {"<FIRST>@gmail.com", "<SECOND>@yahoo.com", "<THIRD>@hotmail.com"};
-//    EMailSender::Response resp = emailSend.send(arrayOfEmail, 2, 1, message);
-//
-//    // Send to 3 different email first to C second to CC and third to CCn
-//    const char* arrayOfEmail[] = {"<FIRST>@gmail.com"}
-//    EMailSender::Response resp = emailSend.send(arrayOfEmail, 3, message);
-Serial.println("Sending status: ");
+    Serial.println("Sending status: ");
 
     Serial.println(resp.status);
     Serial.println(resp.code);
@@ -81,22 +74,22 @@ Serial.println("Sending status: ");
 
 void setup()
 {
-  Serial.begin(115200);
-  const char* ssid = "Portablehugo";
-  const char* password = "0987654321";
+    Serial.begin(115200);
+    const char* ssid = "Portablehugo";
+    const char* password = "0987654321";
 
-  connection_state = WiFiConnect(ssid, password);
-  if(!connection_state)  // if not connected to WIFI
-  Awaits();          // constantly trying to connect
-  pinMode(2,INPUT_PULLUP);   
-   
+    connection_state = WiFiConnect(ssid, password);
+    if(!connection_state)  // if not connected to WIFI
+    Awaits();          // constantly trying to connect
+    pinMode(2,INPUT_PULLUP);   
+
 }
 
 void loop()
 {
-  if(digitalRead(2) ==HIGH){
-    Serial.println("debut de sendmail");
-    SendMail();
-  }
-  delay(100);
+    if(digitalRead(2) ==HIGH){
+        Serial.println("debut de sendmail");
+        SendMail();
+    }
+    delay(100);
 }
