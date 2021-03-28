@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Arduino_OV767X.h>
 
-unsigned short pixels[176 * 144]; // QCIF: 176x144 X 2 bytes per pixel (RGB565)
+unsigned short pixels[25344]; // QCIF: 176x144 X 2 bytes per pixel (RGB565)
 
 void setup()
 {
