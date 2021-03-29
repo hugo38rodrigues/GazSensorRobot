@@ -1,5 +1,5 @@
 /*
- * IRSensor.cpp - Librairie de gestion d'un capteur IR
+ * Near_sensor.cpp - Librairie de gestion d'un capteur IR
  * Créé par Hugo Rodrigues/Anthony Neyret - 14/02/2021
  */
 #include "Arduino.h"
