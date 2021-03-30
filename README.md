@@ -1,4 +1,4 @@
-During our end of study project, we had to realize a gas detector robot with the following specifications
+During our end of study project, we had to realize a gas detector robot with the following specifications.  
 The objective of this project was to transform a robot previously built at the IUT into a robot able to move in a known environment and detect something.
 We completed the specifications with the following functions: 
 - To create a mobile robot with the aim of finding the origin of a gas on a known 
